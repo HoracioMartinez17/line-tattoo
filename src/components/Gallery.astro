@@ -1,14 +1,7 @@
 ---
-
-
-import getImages from '../utils/getImages.ts';
-const imagesDirectory = 'public/Tattoo';
-
-const images= getImages(imagesDirectory);
-
-
 const width= 422;
 const height= 450;
+
 ---
 
 <section class="section gallery" id="gallery" aria-label="galleria de fotos">
@@ -27,20 +20,21 @@ const height= 450;
        <!-- =============== SWIPER GALLERY CARDS =============== -->
       <div class="swiper gallery-cards-1">
         <div class="swiper-wrapper">
-          {images?.map( (image: string | null | undefined, index: number)=> (
+        {   Array.from({length: 49}).map((_, i)=> (
             <div class="swiper-slide">
               <figure class="card-banner img-holder" style={`--width: ${width}; --height: ${height}`}>
                 <img
-                  src={image}
+                  src={`/Tattoo/tattoo-${i + 1}.webp`}
                   width={width}
                   height={height}
                   loading="lazy"
-                  alt={`tatto image ${index + 1}`} 
+                  alt={`tatto image ${i + 1}`} 
                   class="img-cover"
                 />
               </figure>
             </div>
-          ))}
+          ))
+          }
         </div>
         <div class="swiper-pagination"></div>
       </div>

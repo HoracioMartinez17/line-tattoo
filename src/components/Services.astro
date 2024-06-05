@@ -14,17 +14,17 @@ const serviceDetails: PropsServices = {
     {
       id: "tattoos-Pflege",
       nombre: "Tattoos & Pflege",
-      imagenPortada: "/public/Tattoo/IMG_1026.webp",
+      imagenPortada: "/Tattoo/tattoo-30.webp",
     },
     {
       id: "piercings-pflege",
       nombre: "piercings & pflege",
-      imagenPortada: "/public/Piercing/piercing-back.webp",
+      imagenPortada: "/Piercing/piercing-back.webp",
     },
     {
       id: "Cursos",
       nombre: "Line tatto Academy",
-      imagenPortada: "/public/curso de tatuajes-1 (1).jpg",
+      imagenPortada: "/curso de tatuajes-1 (1).jpg",
     },
   ],
 };
@@ -71,7 +71,7 @@ const serviceDetails: PropsServices = {
       ))}
     </ul>
     <img
-      src="/public/piercing-2.png"
+      src="/piercing-2.png"
       alt="forma"
       class="shape shape-1 move-anim"
       width="246"
@@ -79,7 +79,7 @@ const serviceDetails: PropsServices = {
       loading="lazy"
     />
     <img
-    src="/public/tattos-2.png"
+    src="/tattos-2.png"
       alt="forma"
       class="shape shape-2 move-anim"
       width="343"
@@ -113,21 +113,7 @@ const serviceDetails: PropsServices = {
   z-index: 1;
 }
 
-.service-card .has-before::before {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 100%;
-  background-image: url("../images/img-pattern.svg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: repeat;
-  transition: var(--transition-2);
-  transition-delay: 0;
-  z-index: -1;
-  will-change: transform;
-}
+
 
 .service-card:is(:hover, :focus-within) .has-before::before {
   transform: rotateY(0.5turn) translateX(50%);

@@ -1,6 +1,6 @@
 ---
 import InstagramCard from './InstagramCard.astro';
-const access_token = await (import.meta.env.SECRET_TOKEN_INSTAGRAM);
+const access_token = import.meta.env.SECRET_TOKEN_INSTAGRAM;
 const url_ProfileInstagram = `https://graph.facebook.com/v20.0/17841408119012072/?fields=profile_picture_url&access_token=${access_token}`
 const url_Instagram = `https://graph.facebook.com/v20.0/17841408119012072/media?fields=timestamp,media_url,caption,like_count,id,media_type,permalink,username,thumbnail_url,comments_count,limit=10&access_token=${access_token}`;
 interface InstagramMedia {
@@ -50,7 +50,7 @@ async function fetchInstagramProfileData(): Promise<InstagramProfile[]> {
 
 const data: InstagramMedia[] = await fetchInstagramData();
 const profile_picture_url: InstagramProfile[] = await fetchInstagramProfileData();
-console.log(data);
+
 
 ---
 
