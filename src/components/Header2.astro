@@ -1,3 +1,48 @@
+<script>
+  // 1. Usa un tipo más específico para el dialog
+  const dialog = document.getElementById("miDialog") as HTMLDialogElement | null;
+  
+  // 2. btnAbrirModal es una NodeList de elementos, usamos querySelectorAll
+  const btnAbrirModal = document.querySelectorAll("[data-id='abrir-modal']");
+  
+  // 3. btnCerrarModal puede ser null, añadimos una comprobación
+  const btnCerrarModal = document.querySelector("[data-id='cerrar-modal']") as HTMLElement | null;
+  
+  // 4. Usa un tipo más específico para el iframe
+  let iframe = document.getElementById("iframe") as HTMLIFrameElement | null;
+  let urlReservas = "https://kko.kisscalservice.de/?dbstudio=ks_linetattoo";
+  
+  // Agrega un event listener a cada botón de abrir modal
+  btnAbrirModal.forEach(btn => {
+    // Necesitamos asegurarnos de que btn no es null y que es un elemento
+    btn.addEventListener("click", () => {
+      if (dialog) {
+        dialog.showModal(); // Aquí TypeScript sabe que dialog es HTMLDialogElement
+        dialog.style.display = "grid";
+      }
+      if (iframe) {
+        iframe.src = urlReservas;
+        iframe.style.display = "block";
+      }
+    });
+  });
+  
+  // Aseguramos que btnCerrarModal no sea null antes de agregar el event listener
+  if (btnCerrarModal) {
+    btnCerrarModal.addEventListener("click", () => {
+      if (dialog) {
+        dialog.style.display = "none";
+        dialog.close();
+      }
+      if (iframe) {
+        iframe.src = "";
+        iframe.style.display = "none";
+      }
+    });
+  }
+  
+  </script>
+
 <header class="header" id="Inicio">
     <div class="section__container header__container">
       <div class="header__content">
