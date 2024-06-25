@@ -24,10 +24,11 @@ const serviceDetails: PropsServices = {
     {
       id: "Cursos",
       nombre: "Line tatto Academy",
-      imagenPortada: "/curso de tatuajes-1 (1).jpg",
+      imagenPortada: "/line-tatto-portada.webp",
     },
   ],
 };
+const isCursosOpen = false; // Cambia esto a true cuando la web de cursos esté abierta
 ---
 
 <section class="section service  text-center" aria-label="service">
@@ -44,7 +45,8 @@ const serviceDetails: PropsServices = {
       {serviceDetails.categorias.map(({ id, nombre, imagenPortada }) => (
         <li>
           <div class="service-card">
-            <a href={`/${id}`} class="has-before hover:shine">
+            <a href={`/${id}`} class={`has-before hover:shine ${id === 'Cursos' && !isCursosOpen ? 'cursor-pointer' : ''}`}
+                  aria-disabled={id === 'Cursos' && !isCursosOpen ? 'true' : 'false'}>
               <figure class="card-banner img-holder" style="--width: ; --height:">
                 <img
                   src={imagenPortada}
@@ -59,7 +61,8 @@ const serviceDetails: PropsServices = {
               <h3 class="title-4 card-title">
                 <a href={`/${id}`}>{nombre}</a>
               </h3>
-              <a href={`/${id}`} class="btn-text btn-carta hover-underline label-2">
+              <a href={`/${id}`} class={`btn-text btn-carta hover-underline label-2 ${id === 'Cursos' && !isCursosOpen ? 'disabled' : ''}`}
+                  aria-disabled={id === 'Cursos' && !isCursosOpen ? 'true' : 'false'}>
                 <p>KLICKEN SIE, UM MEHR ZU SEHEN</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="328" height="328" viewBox="0 0 24 24">
                   <path fill="#999999" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/>
@@ -94,6 +97,15 @@ const serviceDetails: PropsServices = {
 /*-----------------------------------*\
   #SERVICE
 \*-----------------------------------*/
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.cursor-pointer{
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 .service .section-title {
   margin-block-end: 16px;
@@ -108,7 +120,7 @@ const serviceDetails: PropsServices = {
 }
 
 .service-card .has-before {
-  padding-block: 30px;
+  padding-block: 20px;
   margin-block-end: 26px;
   z-index: 1;
 }

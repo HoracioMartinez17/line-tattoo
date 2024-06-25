@@ -1,7 +1,6 @@
 ---
 const width= 422;
 const height= 450;
-
 ---
 
 <section class="section gallery" id="gallery" aria-label="galleria de fotos">
@@ -20,7 +19,7 @@ const height= 450;
        <!-- =============== SWIPER GALLERY CARDS =============== -->
       <div class="swiper gallery-cards-1">
         <div class="swiper-wrapper">
-        {   Array.from({length: 49}).map((_, i)=> (
+        {Array.from({length: 49}).map((_, i)=> (
             <div class="swiper-slide">
               <figure class="card-banner img-holder" style={`--width: ${width}; --height: ${height}`}>
                 <img

@@ -45,33 +45,33 @@ document.addEventListener('astro:page-load', function() {
 
   
 
-/* Header & back-top-btn */
-const header = document.querySelector("[data-header]");
-const backTopBtn = document.querySelector("[data-back-top-btn]");
-let lastScrollPos = 0;
+// /* Header & back-top-btn */
+// const header = document.querySelector("[data-header]");
+// const backTopBtn = document.querySelector("[data-back-top-btn]");
+// let lastScrollPos = 0;
 
-const hideHeader = () => {
-  // Ocultar o mostrar el encabezado al hacer scroll hacia abajo o arriba
-  const isScrollBottom = lastScrollPos < window.scrollY;
-  if (isScrollBottom) {
-    header?.classList.add("hide");
-  } else {
-    header?.classList.remove("hide");
-  }
-  lastScrollPos = window.scrollY;
-};
+// const hideHeader = () => {
+//   // Ocultar o mostrar el encabezado al hacer scroll hacia abajo o arriba
+//   const isScrollBottom = lastScrollPos < window.scrollY;
+//   if (isScrollBottom) {
+//     header?.classList.add("hide");
+//   } else {
+//     header?.classList.remove("hide");
+//   }
+//   lastScrollPos = window.scrollY;
+// };
 
-window.addEventListener("scroll", () => {
-  // Mostrar el encabezado como activo después de hacer scroll
-  if (window.scrollY >= 50) {
-    header?.classList.add("active");
-    backTopBtn?.classList.add("active");
-    hideHeader();
-  } else {
-    header?.classList.remove("active");
-    backTopBtn?.classList.remove("active");
-  }
-});
+// window.addEventListener("scroll", () => {
+//   // Mostrar el encabezado como activo después de hacer scroll
+//   if (window.scrollY >= 50) {
+//     header?.classList.add("active");
+//     backTopBtn?.classList.add("active");
+//     hideHeader();
+//   } else {
+//     header?.classList.remove("active");
+//     backTopBtn?.classList.remove("active");
+//   }
+// });
 </script>
 
 <!-- <div class="">
@@ -130,10 +130,10 @@ window.addEventListener("scroll", () => {
 			href="mailto:info@linetattooheilbronn.de"
 			class="body-4 email-header"
 		  >
-			 info@linetattooheilbronn.de
+      +49 (0) 1575 3616993
 		  </a>
 		  <a href="tel:+49(0)15753616993" class="body-1 contact-number hover-underline"
-			>+49 (0) 1575 3616993</a
+			>info@linetattooheilbronn.de</a
 		  >
 		</div>
 	  </nav>
@@ -162,7 +162,8 @@ window.addEventListener("scroll", () => {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: transparent;
+  background-color: var(--eerie-black-4);
+  border-color: var(--black-alpha-15);
   padding-block: 20px;
   z-index: 4;
   border-block-end: 1px solid transparent;
@@ -175,7 +176,7 @@ window.addEventListener("scroll", () => {
 }
 
 .header.hide {
-  transform: translateY(-100%);
+  /* transform: translateY(-100%); */
   transition-delay: 250ms;
 }
 
@@ -282,13 +283,24 @@ window.addEventListener("scroll", () => {
   font-size: var(--fontSize-label-2);
   text-transform: uppercase;
   padding-block: 10px;
+  font-weight: 800;
   max-width: unset;
+  color: var(--white);
 }
 
 .navbar-link::after {
   display: none;
 }
-
+.navbar-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(10px); /* Aplica el efecto de desenfoque al fondo */
+  z-index: -1; /* Coloca el fondo borroso detrás de los elementos internos */
+}
 .navbar-link .span {
   transition: var(--transition-1);
 }
@@ -364,7 +376,7 @@ window.addEventListener("scroll", () => {
 
 @media (min-width: 575px) {
 	.header {
-    top: 51px;
+    top: 0;
   }
 
   .header.active {
