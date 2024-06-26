@@ -1,0 +1,175 @@
+<section class="header" id="Inicio">
+    <div class="section__container header__container">
+      <div class="header__content">
+        <h2>Nails Beautiful</h2>
+        <p class="section__description">
+          <strong>Verwandle deine Nägel und Wimpern</strong> bei Nails Beautiful. Wir bieten außergewöhnliche Maniküre- und Wimpernverlängerungsdienste. Besuche uns für ein einzigartiges und personalisiertes Schönheitserlebnis. <strong style="color: var(--gold-crayola);">Erwähnen Sie, dass Sie von Line Tattoo sind und erhalten Sie einen Sonderrabatt!</strong> Unsere Webseite ist nächste Woche verfügbar. Auf der Webseite kannst du Termine reservieren, unsere Dienstleistungen einsehen und Bilder unserer Arbeiten anschauen.
+        </p>
+        <div class="header__btns">
+          <button class="btn btn-secondary-2" disabled>
+            <span class="text text-1">Demnächst!
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#cccccc" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12h16m0 0l-6-6m6 6l-6 6"/></svg>
+            </span>
+            <span class="text text-2" aria-hidden="true">Demnächst!
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12h16m0 0l-6-6m6 6l-6 6"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="header__image">
+        <figure class="header__figure">
+          <img loading="lazy" src="/Piercing/Line_Nails.webp" alt="nails-web" />
+        </figure>
+      </div>
+    </div>
+  </section>
+   
+
+    <style>
+      .header__container {
+    display: grid;
+    gap: 4rem 2rem;
+    overflow: hidden;
+    padding-inline: 1rem;
+  }
+  .header{
+    margin-block:3rem;
+  }
+  .header__content{
+      padding-inline-start: 1.5rem;
+  }
+  .header__content h1 {
+    padding-top: 5rem;
+    margin-bottom: 1rem;
+    font-size: 3.75rem;
+    font-weight: 600;
+    color: var(--platinum);
+   font-family: "Canis";
+    text-align: center;
+  }
+  
+  .header__content h1 span {
+    color: var(--primary-color-dark);
+  }
+  
+  .header__content .section__description {
+    margin-bottom: 2rem;
+  }
+  
+  .header__btns {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn {
+    border: 2px solid hsl(54, 100%, 50%);
+  }
+  
+  .btn span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+  }
+  .btn svg {
+    width: 25px;
+    height: 25px;
+  }
+  .header__image {
+    position: relative;
+    isolation: isolate;
+  }
+  
+  .header__image::before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    clip-path: polygon(10rem 1, 100% 0, 100% 100%, 0 100%);
+    background-color: var(--platinum);
+    z-index: -1;
+  }
+  
+  .header__image img {
+    width: 90vw;
+    max-width: 550px;
+    margin-inline: auto;
+    margin-left: 1.7rem;
+    margin-block-start: 3rem;
+  }
+  
+  .discover__container .section__header {
+    margin-bottom: 2rem;
+    max-width: 550px;
+    margin-inline: auto;
+  }
+  
+    @media (width > 768px) {
+  
+      .container {
+        padding-inline: 5rem;
+      }
+      .header{
+    margin-block:10rem;
+  }
+      .header__container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      }
+      .header__content h1 {
+    padding-top: 0rem;
+    margin-bottom: 1rem;
+    font-size: 3.75rem;
+    font-weight: 600;
+    color: var(--platinum);
+   font-family: "Canis";
+    text-align: center;
+  }
+      .header__image::before {
+        clip-path: polygon(10rem 0, 100% 0, 100% 100%, 0 100%);
+      }
+      .header__image img {
+        margin-left: 7rem;
+      }
+    }
+  
+      .header__content :is(h1, .section__description) {
+        text-align: left;
+      }
+  
+      .header__btns {
+        justify-content: flex-start;
+      }
+  
+  
+      .commitment__container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      }
+  
+      .commitment__content :is(.section__header, .section__description) {
+        text-align: left;
+      }
+  
+      .commitment__content .section__header {
+        max-width: 500px;
+      }
+  
+      .build__content :is(.section__header, .section__description) {
+        text-align: left;
+      }
+  
+      .client__container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      }
+
+      .client__content :is(.section__header, .section__description) {
+        text-align: left;
+      }
+    </style>
