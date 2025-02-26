@@ -5,7 +5,90 @@ const width= 455;
 const height= 485;
 
 ---
+<script>
 
+  import Swiper from 'swiper/bundle';
+    // 1. Usa un tipo más específico para el dialog
+    const dialog = document.getElementById("miDialog") as HTMLDialogElement | null;
+    
+    // 2. btnAbrirModal es una NodeList de elementos, usamos querySelectorAll
+    const btnAbrirModal = document.querySelectorAll("[data-id='abrir-modal']");
+    
+    // 3. btnCerrarModal puede ser null, añadimos una comprobación
+    const btnCerrarModal = document.querySelector("[data-id='cerrar-modal']") as HTMLElement | null;
+    
+    // 4. Usa un tipo más específico para el iframe
+    let iframe = document.getElementById("iframe") as HTMLIFrameElement | null;
+    let urlReservas = "https://cp.kisscalservice.de/booking/categories?studioDB=ks_linetattoo&configId=1";
+    
+    // Agrega un event listener a cada botón de abrir modal
+    btnAbrirModal.forEach(btn => {
+      // Necesitamos asegurarnos de que btn no es null y que es un elemento
+      btn.addEventListener("click", () => {
+        if (dialog) {
+          dialog.showModal(); // Aquí TypeScript sabe que dialog es HTMLDialogElement
+          dialog.style.display = "grid";
+        }
+        if (iframe) {
+          iframe.src = urlReservas;
+          iframe.style.display = "block";
+        }
+      });
+    });
+    
+    // Aseguramos que btnCerrarModal no sea null antes de agregar el event listener
+    if (btnCerrarModal) {
+      btnCerrarModal.addEventListener("click", () => {
+        if (dialog) {
+          dialog.style.display = "none";
+          dialog.close();
+        }
+        if (iframe) {
+          iframe.src = "";
+          iframe.style.display = "none";
+        }
+      });
+    }
+    
+      // This ensures the script runs after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.gallery-cards-3', {
+          cssMode: true,
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          slidesPerView: 4,
+          breakpoints: {
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+          },
+          grid: {
+            rows: 1,
+            fill: 'column',
+          },
+          spaceBetween: 20,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            type: 'bullets',
+          },
+          mousewheel: true,
+          keyboard: true,
+        });
+      });
+    
+    </script>
 
 
 <Layout
@@ -34,7 +117,13 @@ const height= 485;
                 </button>
           </div>
           <dialog id="miDialog" class="modal">
-              <button class="btn btn-secondary-2 btn--close" data-id="cerrar-modal"><span><svg xmlns="http://www.w3.org/2000/svg" width="328" height="328" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#999999" d="m12 14.122l5.303 5.303a1.5 1.5 0 0 0 2.122-2.122L14.12 12l5.304-5.303a1.5 1.5 0 1 0-2.122-2.121L12 9.879L6.697 4.576a1.5 1.5 0 1 0-2.122 2.12L9.88 12l-5.304 5.304a1.5 1.5 0 1 0 2.122 2.12z"/></g></svg></button>
+            <button class="btn btn-secondary-2 btn--close" data-id="cerrar-modal">
+              <!-- SVG simplificado de una X -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6L6 18"></path>
+                <path d="M6 6L18 18"></path>
+              </svg>
+            </button>
               <iframe id="iframe" src="" ></iframe>
             </dialog>
         </div>
@@ -69,90 +158,7 @@ const height= 485;
     </article>
 </Layout>
 
-<script>
 
-import Swiper from 'swiper/bundle';
-  // 1. Usa un tipo más específico para el dialog
-  const dialog = document.getElementById("miDialog") as HTMLDialogElement | null;
-  
-  // 2. btnAbrirModal es una NodeList de elementos, usamos querySelectorAll
-  const btnAbrirModal = document.querySelectorAll("[data-id='abrir-modal']");
-  
-  // 3. btnCerrarModal puede ser null, añadimos una comprobación
-  const btnCerrarModal = document.querySelector("[data-id='cerrar-modal']") as HTMLElement | null;
-  
-  // 4. Usa un tipo más específico para el iframe
-  let iframe = document.getElementById("iframe") as HTMLIFrameElement | null;
-  let urlReservas = "https://kko.kisscalservice.de/?dbstudio=ks_linetattoo";
-  
-  // Agrega un event listener a cada botón de abrir modal
-  btnAbrirModal.forEach(btn => {
-    // Necesitamos asegurarnos de que btn no es null y que es un elemento
-    btn.addEventListener("click", () => {
-      if (dialog) {
-        dialog.showModal(); // Aquí TypeScript sabe que dialog es HTMLDialogElement
-        dialog.style.display = "grid";
-      }
-      if (iframe) {
-        iframe.src = urlReservas;
-        iframe.style.display = "block";
-      }
-    });
-  });
-  
-  // Aseguramos que btnCerrarModal no sea null antes de agregar el event listener
-  if (btnCerrarModal) {
-    btnCerrarModal.addEventListener("click", () => {
-      if (dialog) {
-        dialog.style.display = "none";
-        dialog.close();
-      }
-      if (iframe) {
-        iframe.src = "";
-        iframe.style.display = "none";
-      }
-    });
-  }
-  
-    // This ensures the script runs after the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-      const swiper = new Swiper('.gallery-cards-3', {
-        cssMode: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        slidesPerView: 4,
-        breakpoints: {
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          640: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-        },
-        grid: {
-          rows: 1,
-          fill: 'column',
-        },
-        spaceBetween: 20,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          type: 'bullets',
-        },
-        mousewheel: true,
-        keyboard: true,
-      });
-    });
-  
-  </script>
 <style>
 
     .gallery{
