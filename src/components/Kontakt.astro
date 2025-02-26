@@ -1,0 +1,190 @@
+<section class="reservation ">
+    <div class="container">
+      <div class="form reservation-form">
+        <!-- <form action="#" class="form-left">
+          <h2 class="headline-1 text-center">Kontaktieren Sie uns direkt</h2>
+          <p class="form-text text-center">
+            Nehmen Sie direkt mit uns telefonisch <a href="tel:+49(0)15753616993" class="link">+49 (0) 1575 3616993</a>.
+            Bei Fragen oder Anliegen schreiben Sie uns bitte eine E-Mail an <a href="mailto:info@example.com" class="link">info@linetattooheilbronn.de</a>.
+          </p>
+          
+          <div class="input-wrapper">
+            <input
+              type="text"
+              name="Name und Nachname"
+              placeholder="Ihr Name und Nachname"
+              autocomplete="off"
+              class="input-field"
+            />
+            <input
+            type="email"
+            name="E-Mail"
+            placeholder="@E-Mail"
+            autocomplete="off"
+            class="input-field"
+          />
+
+          </div>
+          <div class="input-wrapper">
+            <input
+            type="tel"
+            name="Telefon"
+            placeholder="Telefon"
+            autocomplete="off"
+            class="input-field"
+          />
+            <div class="icon-wrapper">
+                <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+                <select name="persona" class="input-field">
+                  <option value="service">Service</option>
+                  <option value="tattoo">Tattoo</option>
+                  <option value="piercing">Piercing</option>
+                </select>
+                <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+              </div>
+          </div>
+          <textarea
+            name="mensaje"
+            placeholder="Nachricht"
+            autocomplete="off"
+            class="input-field"></textarea>
+          <button class="btn btn-secondary">
+            <span class="text text-1">ANFRAGE SENDEN</span>
+            <span class="text text-2" aria-hidden="true">ANFRAGE SENDEN</span>
+          </button>
+        </form> -->
+        <div
+          class="form-right text-center"
+          style="background-image: url('/form-pattern.png')"
+        >
+          <h2 class="headline-1 text-center">Kontaktiere uns</h2>
+          <p class="form-text text-center">
+            Bei Fragen oder Anliegen schreiben Sie uns bitte eine E-Mail an <a href="mailto:info@linetattooheilbronn.de" class="link">info@linetattooheilbronn.de</a>.
+          </p>
+          <!-- <p class="contact-label">Kontakt Nummer</p>
+          <a href="tel:+49(0)15753616993" class="body-1 contact-number hover-underline"
+            > +49 (0) 1575 3616993</a
+          >
+          <p class="contact-label">E-Mail</p>
+          <a href="mailto:info@linetattooheilbronn.de" class="body-1 contact-number hover-underline"
+          >info@linetattooheilbronn.de</a
+        > -->
+          <div class="separator"></div>
+          <p class="contact-label">Standort</p>
+          <address class="body-4">
+           Klingeberger Str. 62, 74080 Heilbronn.
+          </address>
+          <p class="contact-label">Öffnungszeiten</p>
+          <p class="body-4">
+            Montag bis Samstag <br />
+            11:00 - 18:00 Uhr
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+
+    /*-----------------------------------*\
+  #RESERVATION
+\*-----------------------------------*/
+
+.reservation-form {
+  margin-block-start: 6rem;
+}
+
+.form-text {
+  margin-block-end: 40px;
+}
+
+.form-text .link {
+  display: inline;
+  color: var(--gold-crayola);
+}
+
+.form-right .headline-1 {
+  margin-block-end: 40px;
+}
+
+.form-right .contact-label {
+  margin-block-end: 5px;
+}
+
+.form-right .separator {
+  margin: 20px auto;
+}
+
+.form-right .body-4 {
+  color: var(--quick-silver);
+  line-height: var(--lineHeight-3);
+}
+
+.form-right .body-4:not(:last-child) {
+  margin-block-end: 25px;
+}
+
+.form-left,
+.form-right {
+  padding: 40px 20px 30px;
+}
+
+.input-field[type="date"] {
+  text-transform: uppercase;
+  padding-inline-end: 10px;
+}
+
+.input-field[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+textarea.input-field {
+  resize: none;
+  height: 140px;
+  padding-block: 20px;
+  line-height: var(--lineHeight-1);
+}
+
+.form-left .btn {
+  max-width: 100%;
+  width: 100%;
+}
+
+.form-right {
+  background-repeat: repeat;
+  background-position: top left;
+}
+
+@media (min-width: 768px) {
+      /**
+   * RESERVATION
+   */
+
+  .reservation .input-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 20px;
+  }
+
+  .reservation .input-wrapper:nth-child(4) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reservation-form {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    margin-block-start: 13rem;
+  }
+}
+@media (min-width: 992px) {
+      /**
+   * RESERVATION
+   */
+
+  .reservation-form {
+    display: grid;
+    grid-template-columns: 1fr ;
+    margin-block-start: 13rem;
+  }
+
+}
+  </style>

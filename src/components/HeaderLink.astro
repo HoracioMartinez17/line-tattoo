@@ -1,0 +1,48 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+const isActive = href === pathname || href === '/' + subpath?.[0];
+---
+
+	<a href={href} class:list={[className, { active: isActive }]} {...props}>
+		<div class="separator"></div>
+		<span class="span" id="span-nav"><slot /></span>
+	  </a>
+</a>
+<style>
+	a {
+  position: relative;
+  font-size: var(--fontSize-label-2);
+  text-transform: uppercase;
+  /* padding-block: 10px; */
+  max-width: unset;
+	}
+	.span {
+		font-weight: 800;
+		font-size:  1.3rem;
+	}
+	a::after {
+  display: none;
+}
+	a .separator {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(45deg);
+  opacity: 0;
+  transition: var(--transition-1);
+}
+	a:is(:hover, :focus-visible, .active) .span{
+		color: var(--gold-crayola);
+  transform: translateX(20px);
+	}
+	a:is(:hover, :focus-visible, .active) .separator{
+		opacity: 1;
+	}
+</style>

@@ -1,0 +1,121 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookiesBtn from '../components/CookiesBtn.astro';
+
+const { title, description } = Astro.props;
+---
+<html lang="de">
+  <head>
+    <BaseHead title={title} description={description} />
+<!-- Google Analytics -->
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+
+	  // Función para cargar Google Analytics
+	  function loadGoogleAnalytics() {
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'UA-234065204-1');
+
+		// Añadir el script de Google Analytics
+		var script = document.createElement('script');
+		script.async = true;
+		script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-234065204-1';
+		document.head.appendChild(script);
+	  }
+
+	  // Verificar si el usuario ya aceptó las cookies
+	  if (document.cookie.split(';').some((item) => item.trim().startsWith('cookies_accepted='))) {
+		document.getElementById('cookie-banner').style.display = 'none';
+		loadGoogleAnalytics();
+	  }
+
+	  // Botón de aceptar cookies
+	  document.getElementById('accept-cookies').addEventListener('click', function() {
+		document.cookie = "cookies_accepted=true; max-age=31536000; path=/";
+		document.getElementById('cookie-banner').style.display = 'none';
+		loadGoogleAnalytics();
+	  });
+
+	  // Botón de declinar cookies
+	  document.getElementById('decline-cookies').addEventListener('click', function() {
+		// Eliminar la cookie de aceptación si existe
+		document.cookie = "cookies_accepted=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		// Ocultar el banner de cookies
+		document.getElementById('cookie-banner').style.display = 'none';
+		// Opcional: puedes hacer otras acciones si el usuario rechaza las cookies
+	  });
+	});
+  </script>
+  <!-- Fin de Google Analytics -->
+
+    <!-- Código de píxel de Facebook -->
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+		  // Función para cargar el píxel de Facebook
+		  function loadFacebookPixel() {
+			!function(f, b, e, v, n, t, s) {
+			  if (f.fbq) return;
+			  n = f.fbq = function() {
+				n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+			  };
+			  if (!f._fbq) f._fbq = n;
+			  n.push = n;
+			  n.loaded = true;
+			  n.version = '2.0';
+			  n.queue = [];
+			  t = b.createElement(e);
+			  t.async = true;
+			  t.src = v;
+			  s = b.getElementsByTagName(e)[0];
+			  s.parentNode.insertBefore(t, s);
+			}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+			fbq('init', '227419319795173');
+			fbq('track', 'PageView');
+		  }
+
+		  // Verificar si el usuario ya aceptó las cookies
+		  if (document.cookie.split(';').some((item) => item.trim().startsWith('cookies_accepted='))) {
+			document.getElementById('cookie-banner').style.display = 'none';
+			loadFacebookPixel();
+		  }
+
+		  // Botón de aceptar cookies
+		  document.getElementById('accept-cookies').addEventListener('click', function() {
+			document.cookie = "cookies_accepted=true; max-age=31536000; path=/";
+			document.getElementById('cookie-banner').style.display = 'none';
+			loadFacebookPixel();
+		  });
+
+		  // Botón de declinar cookies
+		  document.getElementById('decline-cookies').addEventListener('click', function() {
+			// Eliminar la cookie de aceptación si existe
+			document.cookie = "cookies_accepted=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			// Ocultar el banner de cookies
+			document.getElementById('cookie-banner').style.display = 'none';
+			// Opcional: puedes hacer otras acciones si el usuario rechaza las cookies
+		  });
+		});
+	  </script>
+
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=227419319795173&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- Finalizar código de píxel de Facebook -->
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <CookiesBtn/>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+

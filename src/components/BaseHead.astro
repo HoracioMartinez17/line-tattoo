@@ -1,0 +1,86 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.css';
+import '../styles/swiper.css';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const { title, description, image = '/hero-line.webp' } = Astro.props;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/icons8-buda-100.png" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Font preloads -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- Ionicon link -->
+<script is:inline src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script is:inline src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script is:inline src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content="tattoo, piercing, Heilbronn, manicura, extensión de pestañas, Maniküre, Wimpernverlängerung, Line Tattoo, Nails Beautiful" />
+<meta name="author" content="Line Tattoo" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Line Tattoo & Piercing",
+    "image": [
+        {new URL(image, Astro.url)}
+    ],
+    "@id": "",
+    "url": "{Astro.url}",
+    "telephone": "+49 1575 3616993",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Klingeberger Str. 62",
+        "addressLocality": "Heilbronn",
+        "postalCode": "74080",
+        "addressCountry": "DE"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 49.140274,
+        "longitude": 9.220541
+    },
+    "sameAs": [
+        "https://www.facebook.com/linetattooundpiercing",
+        "https://www.instagram.com/yourprofile"
+    ]
+}
+</script>

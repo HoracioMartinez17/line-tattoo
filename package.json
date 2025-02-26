@@ -1,0 +1,25 @@
+{
+  "name": "line-tattoo",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/cloudflare": "^10.2.6",
+    "@astrojs/preact": "^3.5.0",
+    "@types/swiper": "^6.0.0",
+    "astro": "^4.9.2",
+    "preact": "^10.22.0",
+    "swiper": "^11.1.4",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.1"
+  }
+}
