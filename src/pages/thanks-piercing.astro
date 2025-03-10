@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
         <h2>Wichtige Informationen</h2>
         <ul>
           <li>Bitte seien Sie pünktlich zu Ihrem Termin.</li>
-          <li>Bei Fragen kontaktieren Sie uns bitte unter +49 (0) 1575 3616993.</li>
+          <li>Bei Fragen kontaktieren Sie uns bitte unter: <a href="mailto:info@linetattooheilbronn.de">info@linetattooheilbronn.de</a></li>
         </ul>
       </div>
       <div class="action-buttons">
@@ -105,6 +105,17 @@ import Layout from '../layouts/Layout.astro';
     position: absolute;
     left: 0;
     color: var(--accent-color);
+  }
+
+  .booking-details a {
+    color: var(--gold-crayola);
+    text-decoration: underline;
+    transition: all 0.3s ease;
+  }
+  
+  .booking-details a:hover {
+    text-decoration: underline;
+    opacity: 0.9;
   }
 
   .action-buttons {
