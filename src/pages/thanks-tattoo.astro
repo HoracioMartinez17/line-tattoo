@@ -27,16 +27,37 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </div>
-
+  
   <script>
-    // Pixel de Facebook para seguimiento de reserva de tatuaje completada
-    if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-      window.fbq('track', 'CompleteRegistration', {
-        content_name: 'Tattoo Consultation Completed',
-        content_category: 'Tattoo',
-        status: 'confirmed'
-      });
-    }
+    // Esperamos a que el documento esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function() {
+      // Intentamos enviar el evento varias veces para asegurarnos de que fbq esté disponible
+      function tryToSendEvent() {
+        if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
+          console.log("Enviando evento SubscribeButton para Tattoo");
+          window.fbq('track', 'SubscribeButton', {
+            content_name: 'Tattoo Consultation Completed',
+            content_category: 'Tattoo',
+            status: 'confirmed'
+          });
+          return true;
+        } else {
+          console.log("No se pudo enviar el evento: fbq=" + (typeof window.fbq !== 'undefined') + ", cookies=" + document.cookie.includes('cookies_accepted=true'));
+          return false;
+        }
+      }
+
+      // Intentamos inmediatamente
+      if (!tryToSendEvent()) {
+        // Si falla, intentamos de nuevo después de 1 segundo
+        setTimeout(function() {
+          if (!tryToSendEvent()) {
+            // Último intento después de 3 segundos
+            setTimeout(tryToSendEvent, 2000);
+          }
+        }, 1000);
+      }
+    });
   </script>
 </Layout>
 
