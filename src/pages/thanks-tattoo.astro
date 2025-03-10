@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Danke für Ihre Tattoo-Beratung | Line Tattoo & Piercing" description="Vielen Dank für Ihre Beratungstermin-Reservierung bei Line Tattoo & Piercing Studio in Heilbronn.">
+  <div class="gracias-container">
+    <div class="gracias-content">
+      <h1>Vielen Dank für Ihre Tattoo-Beratungsanfrage!</h1>
+      <div class="confirmation-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24">
+          <path fill="#4CAF50" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+      <p class="confirmation-message">
+        Ihre Beratungsanfrage wurde erfolgreich bestätigt. Unser Team wird Ihre Ideen besprechen und den perfekten Weg finden, Ihr einzigartiges Tattoo zum Leben zu erwecken.
+      </p>
+      <div class="booking-details">
+        <h2>Wichtige Informationen</h2>
+        <ul>
+          <li>Bitte seien Sie pünktlich zu Ihrem Termin.</li>
+          <li>Bei der Beratung können Sie alle Ihre Fragen mit unserem Tätowierer besprechen.</li>
+          <li>Bei Fragen kontaktieren Sie uns bitte unter +49 (0) 1575 3616993.</li>
+        </ul>
+      </div>
+      <div class="action-buttons">
+        <a href="/" class="btn ">Zurück zur Startseite</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pixel de Facebook para seguimiento de reserva de tatuaje completada
+    if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
+      window.fbq('track', 'CompleteRegistration', {
+        content_name: 'Tattoo Consultation Completed',
+        content_category: 'Tattoo',
+        status: 'confirmed'
+      });
+    }
+  </script>
+</Layout>
+
+<style>
+  .gracias-container {
+    padding-block-start: 10rem;
+    padding-block-end: 2.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .gracias-content {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-family: "Canis", sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--platinum);
+    word-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.2;
+  }
+  
+  .confirmation-icon {
+    margin: 2rem 0;
+  }
+  
+  .confirmation-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .booking-details {
+    margin: 3rem 0;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .booking-details h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--platinum);
+  }
+  
+  .booking-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .booking-details li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  
+  .booking-details li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var (--accent-color);
+  }
+  
+  .action-buttons {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+
+ .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: var(--accent-color);
+  }
+  
+  @media (max-width: 768px) {
+    .gracias-container {
+        padding-block-start: 10rem;
+        padding-block-end: 2.3rem;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+    
+    .btn {
+      width: 80%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+  }
+</style>

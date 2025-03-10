@@ -1,4 +1,4 @@
- /// <reference path="../types/facebook-pixel.d.ts" />
+/// <reference path="../types/facebook-pixel.d.ts" />
 <script>
   // 1. Usa un tipo más específico para el dialog
   const dialog = document.getElementById("miDialog") as HTMLDialogElement | null;
@@ -11,32 +11,52 @@
 
   // 4. Usa un tipo más específico para el iframe
   let iframe = document.getElementById("iframe") as HTMLIFrameElement | null;
-  let urlReservas = "https://cp.kisscalservice.de/booking/categories?studioDB=ks_linetattoo&configId=1";
-
+  
+  // URLs base para reservas
+  let urlReservasBase = "https://cp.kisscalservice.de/booking/categories?studioDB=ks_linetattoo&configId=1";
+  let urlReservas = urlReservasBase;
+  
+  // URL para redireccionar después de completar la reserva
+  const successRedirect = "&successRedirect=";
+  
   // Agrega un event listener a cada botón de abrir modal
   btnAbrirModal.forEach(btn => {
     // Necesitamos asegurarnos de que btn no es null y que es un elemento
     btn.addEventListener("click", () => {
-      if (dialog) {
-        dialog.showModal(); // Aquí TypeScript sabe que dialog es HTMLDialogElement
-        dialog.style.display = "grid";
-      }
-      // Verificar si window.fbq existe y las cookies están aceptadas
-      if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-        const buttonText = btn.textContent?.trim().toLowerCase() || '';
-
-        if (buttonText.includes('piercing')) {
+      const buttonText = btn.textContent?.trim().toLowerCase() || '';
+      
+      // Determinar qué tipo de reserva es y establecer la URL de redirección adecuada
+      let redirectUrl = '';
+      if (buttonText.includes('piercing')) {
+        redirectUrl = window.location.origin + '/thanks-piercing';
+        
+        // Tracking de evento de inicio de reserva de piercing
+        if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
           window.fbq('track', 'StartBooking', {
             content_name: 'Piercing Reservation',
             content_category: 'Piercing'
           });
-        } else if (buttonText.includes('beratungs')) {
+        }
+      } else if (buttonText.includes('beratungs')) {
+        redirectUrl = window.location.origin + '/thanks-tattoo';
+        
+        // Tracking de evento de inicio de reserva de tatuaje/consulta
+        if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
           window.fbq('track', 'StartBooking', {
             content_name: 'Consultation Reservation',
-            content_category: 'Consultation'
+            content_category: 'Tattoo Consultation'
           });
         }
       }
+      
+      // Agregar la URL de redirección a la URL de reservas
+      urlReservas = urlReservasBase + successRedirect + encodeURIComponent(redirectUrl);
+      
+      if (dialog) {
+        dialog.showModal();
+        dialog.style.display = "grid";
+      }
+      
       if (iframe) {
         iframe.src = urlReservas;
         iframe.style.display = "block";
@@ -57,7 +77,6 @@
       }
     });
   }
-  
 </script>
 
 <header class="header" id="Inicio">
@@ -86,13 +105,13 @@
                   </button>
         </div>
         <dialog id="miDialog" class="modal">
-          <button class="btn btn-secondary-2 btn--close" data-id="cerrar-modal">
-            <!-- SVG simplificado de una X -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 6L6 18"></path>
-              <path d="M6 6L18 18"></path>
-            </svg>
-          </button>
+            <button class="btn btn-secondary-2 btn--close" data-id="cerrar-modal">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#999999" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+              </span>
+            </button>
             <iframe id="iframe" src=""></iframe>
           </dialog>
       </div>
@@ -243,6 +262,38 @@
 
     .client__content :is(.section__header, .section__description) {
       text-align: left;
+    }
+
+    /* Estilos específicos para el botón de cierre del modal */
+    .btn--close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border-color: var(--gold-crayola);
+      padding: 8px;
+      width: auto;
+      height: auto;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .btn--close span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn--close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .btn--close:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
   </style>
