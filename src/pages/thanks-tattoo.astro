@@ -34,7 +34,8 @@ import Layout from '../layouts/Layout.astro';
       // Intentamos enviar el evento varias veces para asegurarnos de que fbq esté disponible
       function tryToSendEvent() {
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-          window.fbq('track', 'SubscribeButton', {
+          // Usamos trackCustom para eventos personalizados en lugar de track
+          window.fbq('trackCustom', 'CompleteTattooConsultation', {
             content_name: 'Tattoo Consultation Completed',
             content_category: 'Tattoo',
             status: 'confirmed'

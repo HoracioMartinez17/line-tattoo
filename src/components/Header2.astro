@@ -32,7 +32,7 @@
         
         // Tracking de evento de inicio de reserva de piercing
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-          window.fbq('track', 'StartBooking', {
+          window.fbq('trackCustom', 'StartPiercingBooking', {
             content_name: 'Piercing Reservation',
             content_category: 'Piercing'
           });
@@ -42,7 +42,7 @@
         
         // Tracking de evento de inicio de reserva de tatuaje/consulta
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-          window.fbq('track', 'StartBooking', {
+          window.fbq('trackCustom', 'StartTattooConsultation', {
             content_name: 'Consultation Reservation',
             content_category: 'Tattoo Consultation'
           });
