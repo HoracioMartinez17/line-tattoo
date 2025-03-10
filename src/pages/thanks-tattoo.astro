@@ -34,7 +34,6 @@ import Layout from '../layouts/Layout.astro';
       // Intentamos enviar el evento varias veces para asegurarnos de que fbq esté disponible
       function tryToSendEvent() {
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-          console.log("Enviando evento SubscribeButton para Tattoo");
           window.fbq('track', 'SubscribeButton', {
             content_name: 'Tattoo Consultation Completed',
             content_category: 'Tattoo',
@@ -42,7 +41,6 @@ import Layout from '../layouts/Layout.astro';
           });
           return true;
         } else {
-          console.log("No se pudo enviar el evento: fbq=" + (typeof window.fbq !== 'undefined') + ", cookies=" + document.cookie.includes('cookies_accepted=true'));
           return false;
         }
       }
