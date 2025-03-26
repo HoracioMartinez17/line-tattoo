@@ -1,0 +1,172 @@
+---
+// Props del componente
+interface Props {
+  id: string;             // ID único para el modal
+  btnCloseId?: string;    // ID para el botón de cierre (opcional)
+  title?: string;         // Título del modal (opcional)
+  iframeUrl?: string;     // URL del iframe (si se usa)
+  showIframe?: boolean;   // Controla si se muestra un iframe o contenido personalizado
+}
+
+const { 
+  id, 
+  btnCloseId = "modal-close", 
+  title = "", 
+  iframeUrl = "", 
+  showIframe = false 
+} = Astro.props;
+---
+
+<dialog id={id} class="modal">
+  <div class="modal-content">
+    {title && <h2 class="modal-title">{title}</h2>}
+    
+    <button class="modal-close" data-id={btnCloseId}>
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="var(--platinum)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L6.75 17.25"></path>
+        <path stroke="var(--platinum)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 6.75L17.25 17.25"></path>
+      </svg>
+    </button>
+    
+    {showIframe ? (
+      <iframe id={`iframe-${id}`} src="" class="modal-iframe"></iframe>
+    ) : (
+      <div class="modal-slot-content">
+        <slot />
+      </div>
+    )}
+  </div>
+</dialog>
+
+<script define:vars={{ id, iframeUrl, showIframe }}>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById(id);
+    const closeButton = modal.querySelector('[data-id]');
+    const iframe = showIframe ? document.getElementById(`iframe-${id}`) : null;
+    
+    // Función para abrir el modal
+    window.openModal = function(modalId, url = "") {
+      if (modalId === id) {
+        if (showIframe && iframe) {
+          iframe.src = url || iframeUrl;
+        }
+        modal.showModal();
+      }
+    };
+    
+    // Función para cerrar el modal
+    window.closeModal = function(modalId) {
+      if (modalId === id) {
+        if (showIframe && iframe) {
+          iframe.src = "";
+        }
+        modal.close();
+      }
+    };
+    
+    // Añadir evento al botón de cierre
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
+        window.closeModal(id);
+      });
+    }
+    
+    // Cerrar al hacer clic fuera del modal
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        window.closeModal(id);
+      }
+    });
+  });
+</script>
+
+<style>
+  .modal {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    background-color: var(--background-color);
+    max-width: 95vw;
+    width: 100%;
+    max-height: 95vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .modal-title {
+    font-family: "Canis", sans-serif;
+    color: var(--platinum);
+    margin: 1rem 0;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--background-color-light);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  .modal-close:hover {
+    transform: scale(1.1);
+  }
+  
+  .modal-iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    display: block;
+  }
+  
+  .modal-slot-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(80vh - 60px);
+  }
+  
+  /* Estilos para backdrop cuando el modal está abierto */
+  .modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+  }
+  
+  @media (max-width: 768px) {
+    .modal {
+      width: 95vw;
+      max-height: 80vh;
+    }
+    
+    .modal-iframe {
+      height: 70vh;
+    }
+    
+    .modal-title {
+      font-size: 1.3rem;
+    }
+  }
+</style>
