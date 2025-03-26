@@ -33,7 +33,12 @@ import Layout from '../layouts/Layout.astro';
       // Intentamos enviar el evento varias veces para asegurarnos de que fbq esté disponible
       function tryToSendEvent() {
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
-          // Usamos trackCustom para eventos personalizados en lugar de track
+          // Evento Lead estándar de Facebook para reservas de piercing
+          window.fbq('track', 'Lead', {
+            content_category: 'Piercing Reservation'
+          });
+          
+          // También enviamos el evento personalizado para tener datos más detallados
           window.fbq('trackCustom', 'CompletePiercingBooking', {
             content_name: 'Piercing Reservation Completed',
             content_category: 'Piercing',

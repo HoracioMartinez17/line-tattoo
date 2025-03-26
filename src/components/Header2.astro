@@ -32,6 +32,12 @@
         
         // Tracking de evento de inicio de reserva de piercing
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
+          // Evento Lead estándar para iniciar reserva de piercing
+          window.fbq('track', 'Lead', {
+            content_category: 'Piercing Reservation Initial'
+          });
+          
+          // También enviamos el evento personalizado
           window.fbq('trackCustom', 'StartPiercingBooking', {
             content_name: 'Piercing Reservation',
             content_category: 'Piercing'
@@ -39,9 +45,15 @@
         }
       } else if (buttonText.includes('beratungs')) {
         redirectUrl = window.location.origin + '/thanks-tattoo';
-        
+
         // Tracking de evento de inicio de reserva de tatuaje/consulta
         if (typeof window.fbq !== 'undefined' && document.cookie.includes('cookies_accepted=true')) {
+          // Evento Lead estándar para iniciar consulta de tatuaje
+          window.fbq('track', 'Lead', {
+            content_category: 'Tattoo Consultation Initial'
+          });
+
+          // También enviamos el evento personalizado
           window.fbq('trackCustom', 'StartTattooConsultation', {
             content_name: 'Consultation Reservation',
             content_category: 'Tattoo Consultation'
